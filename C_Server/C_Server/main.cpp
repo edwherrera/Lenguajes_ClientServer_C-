@@ -44,7 +44,8 @@ void UserInfo(Server server){
     server.Read();
     
     DBManager db_m;
-    db_m.UserInfo(server.buffer);
+    std::string res = db_m.UserInfo(server.buffer);
+    server.Send(res.c_str());
     //std::cout << db_m.Found << std::endl;
 }
 

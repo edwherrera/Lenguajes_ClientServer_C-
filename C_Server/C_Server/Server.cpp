@@ -16,7 +16,7 @@ Server::Server(){
     // clear address structure
     bzero((char *) &serv_addr, sizeof(serv_addr));
     
-    portno = 1070;
+    portno = 1050;
     
     /* setup the host_addr structure for use in bind call */
     // server byte order

@@ -29,7 +29,7 @@ public:
         
     void AgregarUsuario(std::string, std::string, std::string, std::string, std::string, std::string);
     void RemoverUsuario(std::string);
-    void UserInfo(std::string);
+    std::string UserInfo(std::string);
     bool UserExists(std::string, std::string);
 };
 

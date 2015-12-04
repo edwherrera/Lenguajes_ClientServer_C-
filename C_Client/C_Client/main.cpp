@@ -45,6 +45,9 @@ void UserInfo(int sockfd){
     bzero(buffer, 256);
     fgets(buffer, 255, stdin);
     write(sockfd, buffer, strlen(buffer));
+    bzero(buffer, 256);
+    read(sockfd, buffer, 255);
+    fputs(buffer, stdout);
 }
 
 int main(int argc, char *argv[])
@@ -55,7 +58,7 @@ int main(int argc, char *argv[])
     
     char buffer[256];
     
-    portno = 1070;
+    portno = 1050;
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0)
         error("ERROR opening socket");
