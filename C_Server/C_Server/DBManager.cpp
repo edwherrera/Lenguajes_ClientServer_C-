@@ -11,7 +11,6 @@
 DBManager::DBManager(){
     
     db_name = "Users.db";
-    _selectResult = "";
 }
 
 DBManager::~DBManager(){

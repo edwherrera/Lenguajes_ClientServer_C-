@@ -44,6 +44,18 @@ int main(int argc, char *argv[])
     bzero(buffer, 256);
     fgets(buffer, 255, stdin);
     write(sockfd, buffer, strlen(buffer));
+    
+    int count = 0;
+    
+    while (count < 6) {
+        bzero(buffer, 256);
+        read(sockfd, buffer, 255);
+        fputs(buffer, stdout);
+        bzero(buffer, 256);
+        fgets(buffer, 255, stdin);
+        write(sockfd, buffer, strlen(buffer));
+        count++;
+    }
     close(sockfd);
 
     return 0;
