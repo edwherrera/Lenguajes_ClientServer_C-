@@ -25,9 +25,12 @@ public:
     DBManager();
     ~DBManager();
     
+    static bool Found;
+        
     void AgregarUsuario(std::string, std::string, std::string, std::string, std::string, std::string);
     void RemoverUsuario(std::string);
     void UserInfo(std::string);
+    bool UserExists(std::string, std::string);
 };
 
 #endif /* DBManager_hpp */

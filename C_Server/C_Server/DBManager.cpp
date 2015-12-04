@@ -26,6 +26,7 @@ void DBManager::AgregarUsuario(std::string uname, std::string name, std::string 
         CrearTabla();
         std::string sql = "INSERT INTO USERS(username, name, email, fnac, cedula, imgUrl) values('" + uname + "','"+name+"','"+email+"','"+fecha+"','"+cedula+"','"+img+"');";
         sqlite3_exec(db, sql.c_str(), Callback, 0, &zErrMsg);
+
     }
     
     sqlite3_close(db);
@@ -55,11 +56,11 @@ void DBManager::RemoverUsuario(std::string username){
 
 void DBManager::UserInfo(std::string username){
     int rc = sqlite3_open(db_name, &db);
+    Found = false;
     char *zErrMsg = 0;
-    
     if(!rc){
         CrearTabla();
-        std::string sql = "SELECT * FROM USERS;";
+        std::string sql = "SELECT * FROM users WHERE username = '" + username + "';";
         sqlite3_exec(db, sql.c_str(), Callback, 0, &zErrMsg);
     }
     
@@ -67,11 +68,30 @@ void DBManager::UserInfo(std::string username){
 
 }
 
+bool DBManager::UserExists(std::string field, std::string value){
+    int rc = sqlite3_open(db_name, &db);
+    Found = false;
+    char *zErrMsg = 0;
+    if(!rc){
+        CrearTabla();
+        std::string sql = "SELECT * FROM users WHERE " + field + " = '" + value + "';";
+        sqlite3_exec(db, sql.c_str(), Callback, 0, &zErrMsg);
+        
+    }
+
+    sqlite3_close(db);
+    
+    return Found;
+}
+
 int DBManager::Callback(void *NotUsed, int argc, char **argv, char **azColName){
     int i;
+    Found = true;
     for(i=0; i<argc; i++){
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
     }
     printf("\n");
     return 0;
 }
+
+bool DBManager::Found = false;
