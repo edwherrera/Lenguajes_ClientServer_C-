@@ -16,9 +16,12 @@ void error(const char *msg)
 void AgregarUsuario(int sockfd){
     int count = 0;
     char buffer[256];
-    while (count < 6) {
+    while (1) {
         bzero(buffer, 256);
         read(sockfd, buffer, 255);
+        if(strcmp("end", buffer) == 0){
+            return;
+        }
         fputs(buffer, stdout);
         bzero(buffer, 256);
         fgets(buffer, 255, stdin);

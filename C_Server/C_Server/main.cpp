@@ -4,6 +4,7 @@
 
 #include "Server.hpp"
 #include "DBManager.hpp"
+#include "Validations.hpp"
 
 void AgregarUsuario(Server server){
     std::string questions[] = {"Username ", "Name ", "Email ", "Fecha de Nacimiento ", "Cedula ", "Imagen "};
@@ -18,10 +19,13 @@ void AgregarUsuario(Server server){
         if (count == 0 && db_m.UserExists("username", server.buffer)) {
             count--;
         }
-        else if (count == 2 && db_m.UserExists("email", server.buffer)){
+        else if (count == 2 && (db_m.UserExists("email", server.buffer) || !Validations::CheckEmail(server.buffer))){
             count--;
         }
-        else if (count == 4 && db_m.UserExists("cedula", server.buffer)){
+        else if (count == 3 && !Validations::CheckDate(server.buffer)){
+            count--;
+        }
+        else if (count == 4 && (db_m.UserExists("cedula", server.buffer) || !Validations::CheckCedula(server.buffer))){
             count--;
         }
         
@@ -29,6 +33,7 @@ void AgregarUsuario(Server server){
     }
     
     db_m.AgregarUsuario(answers[0], answers[1], answers[2], answers[3], answers[4], answers[5]);
+    server.Send("end");
 }
 
 void RemoverUsuario(Server server){

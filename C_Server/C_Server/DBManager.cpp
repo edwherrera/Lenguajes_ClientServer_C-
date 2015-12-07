@@ -13,8 +13,6 @@ DBManager::DBManager(){
 }
 
 DBManager::~DBManager(){
-    
-    
 }
 
 void DBManager::AgregarUsuario(std::string uname, std::string name, std::string email, std::string fecha, std::string cedula, std::string img){
