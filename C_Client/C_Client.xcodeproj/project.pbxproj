@@ -237,6 +237,7 @@
 				E77C8A431C114D2D009F9507 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
