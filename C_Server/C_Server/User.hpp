@@ -23,7 +23,6 @@ public:
     string Cedula;
     string Fecha;
     string Img;
-    
     User(string, string, string, string, string, string);
     ~User();
 };
