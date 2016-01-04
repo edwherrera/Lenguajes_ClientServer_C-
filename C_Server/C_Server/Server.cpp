@@ -8,14 +8,14 @@
 
 #include "Server.hpp"
 
-Server::Server(){
+Server::Server(int port){
     sockfd =  socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0)
         error("ERROR opening socket");
     
     bzero((char *) &serv_addr, sizeof(serv_addr));
     
-    portno = 1050;
+    portno = port;
     
     serv_addr.sin_family = AF_INET;
     

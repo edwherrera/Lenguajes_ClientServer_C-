@@ -26,8 +26,9 @@ public:
     char buffer[256];
     struct sockaddr_in serv_addr, cli_addr;
     int n;
-
-    Server();
+    
+    Server() : Server(1050){}
+    Server(int);
     ~Server();
     
     void AcceptSock();
